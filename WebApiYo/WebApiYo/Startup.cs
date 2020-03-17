@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WebApiYo.Contexts;
+using WebApiYo.Data;
 using WebApiYo.Models;
 using WebApiYo.Services;
 
@@ -34,11 +35,19 @@ namespace WebApiYo
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //3
             services.AddCors(options =>
             {
                 options.AddPolicy("PermitirApiRequest",
                     builder => builder.WithOrigins("http://www.apirequest.io").WithMethods("GET", "POST").AllowAnyHeader());
             });
+
+
+            //=====================5
+            services.AddScoped<ValuesRepository>();
+            //=====================
+
+            //3
             services.AddScoped<HashService>();
             services.AddDataProtection();
 
@@ -52,11 +61,14 @@ namespace WebApiYo
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            ////5
+            //services.AddScoped<ValuesRepository>();
+
 
             services.AddControllers();
 
 
-
+            //4
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                      options.TokenValidationParameters = new TokenValidationParameters

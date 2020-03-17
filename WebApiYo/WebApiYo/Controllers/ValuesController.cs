@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using WebApiYo.Data;
+using WebApiYo.Models;
 using WebApiYo.Services;
 
 namespace WebApiYo.Controllers
@@ -20,18 +22,37 @@ namespace WebApiYo.Controllers
         private readonly IDataProtector _protector;
         private readonly HashService _hashService;
 
-        public ValuesController(IDataProtectionProvider protectionProvider, HashService hashService)
+        private readonly ValuesRepository _repository;
+
+
+        //===============================
+        //private readonly ValuesRepository _repository;
+
+        //public ValuesController(ValuesRepository repository)
+        //{
+        //    this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        //}
+        //===============================
+
+        public ValuesController(IDataProtectionProvider protectionProvider, HashService hashService, ValuesRepository repository)
         {
             _protector = protectionProvider.CreateProtector("valor_unico_y_quizas_secreto");
             _hashService = hashService;
+
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
+
 
         // GET api/values
         [HttpGet]
         [EnableCors("PermitirApiRequest")]
-        public ActionResult<IEnumerable<string>> Get()
+        //public ActionResult<IEnumerable<string>> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+        public async Task<ActionResult<IEnumerable<Value>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _repository.GetAll();
         }
 
         [HttpGet("hash")]

@@ -82,7 +82,9 @@ namespace WebApiYo.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             // Tiempo de expiración del token. En nuestro caso lo hacemos de una hora.
-            var expiration = DateTime.UtcNow.AddYears(1);
+            //var expiration = DateTime.UtcNow.AddYears(1);
+            var expiration = DateTime.UtcNow.AddHours(1);
+
 
             JwtSecurityToken token = new JwtSecurityToken(
                issuer: null,
