@@ -34,7 +34,7 @@ namespace WebApiYo.Controllers
         [HttpPost("Crear")]
         public async Task<ActionResult<UserToken>> CreateUser([FromBody] UserInfo model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -69,6 +69,15 @@ namespace WebApiYo.Controllers
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
+
+                //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                //new Claim(JwtRegisteredClaimNames.NameId, usuarioInfo.Id.ToString()),
+                //new Claim("nombre", usuarioInfo.Nombre),
+                //new Claim("apellidos", usuarioInfo.Apellidos),
+                //new Claim(JwtRegisteredClaimNames.Email, usuarioInfo.Email),
+                //new Claim(ClaimTypes.Role, usuarioInfo.Rol),
+
+
                 new Claim("miValor", "Lo que yo quiera"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
