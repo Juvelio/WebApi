@@ -22,6 +22,7 @@ namespace WebApiYo.Controllers
         private readonly IDataProtector _protector;
         private readonly HashService _hashService;
 
+        //==================PROCEDIMIENTO ALMACENADO
         private readonly ValuesRepository _repository;
 
 
@@ -39,6 +40,7 @@ namespace WebApiYo.Controllers
             _protector = protectionProvider.CreateProtector("valor_unico_y_quizas_secreto");
             _hashService = hashService;
 
+            //==================PROCEDIMIENTO ALMACENADO
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
@@ -83,10 +85,18 @@ namespace WebApiYo.Controllers
         }
 
         // POST api/values
+        //[HttpPost]
+        //public ActionResult Post([FromBody] string value)
+        //{
+        //    return Ok();
+        //}
+
+        //==================PROCEDIMIENTO ALMACENADO
+        // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] string value)
+        public async Task Post([FromBody] Value value)
         {
-            return Ok();
+            await _repository.Insert(value);
         }
 
         // PUT api/values/5
@@ -95,10 +105,18 @@ namespace WebApiYo.Controllers
         {
         }
 
+        //// DELETE api/values/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
+
+        //==================PROCEDIMIENTO ALMACENADO
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await _repository.DeleteById(id);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace WebApiYo
                     builder => builder.WithOrigins("http://www.apirequest.io").WithMethods("GET", "POST").AllowAnyHeader());
             });
 
-
+            //==================PROCEDIMIENTO ALMACENADO
             //=====================5
             services.AddScoped<ValuesRepository>();
             //=====================
