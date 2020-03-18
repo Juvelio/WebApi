@@ -45,6 +45,8 @@ namespace WebApiYo
             //==================PROCEDIMIENTO ALMACENADO
             //=====================5
             services.AddScoped<ValuesRepository>();
+            services.AddScoped<MaspeRepository>();
+
             //=====================
 
             //3
