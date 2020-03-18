@@ -24,6 +24,11 @@ namespace WebApiYo.Contexts
 
             //builder.Entity<IdentityRole>().HasData(roleAdmin);
 
+
+            //var roleOperador = new IdentityRole()
+            //{ Id = "022459e6-d5b2-4ed1-bb9f-e5ba96649a6e", Name = "operador", NormalizedName = "operador" };
+            //builder.Entity<IdentityRole>().HasData(roleOperador);
+
             //pagina Generador de GUID en línea (https://www.guidgenerator.com/online-guid-generator.aspx)
 
             base.OnModelCreating(builder);

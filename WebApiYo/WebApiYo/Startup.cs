@@ -103,7 +103,9 @@ namespace WebApiYo
             app.UseAuthorization();
 
             //02
-            app.UseCors();
+            //app.UseCors();
+            //app.UseCors(builder => builder.WithOrigins("https://www.apirequest.io").WithMethods("GET", "POST").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("*").WithMethods("GET", "POST").AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
